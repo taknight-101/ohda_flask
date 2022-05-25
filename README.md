@@ -1,5 +1,10 @@
-Zedme Online Learning Platform
+Ohda
 ===================
+
+
+A flask based asset management system 
+===================
+
 
 - - - - 
 # to install back_end code dependencies #
