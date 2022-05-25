@@ -1,0 +1,121 @@
+{% import "common.html" as macros with context %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- what is happening -->
+{{macros.head("عرض المُلاك السابقين من الأحدث للأقدم")}}
+
+{{macros.navbar()}}
+
+{{macros.side_menu()}}
+
+<!-- {{ macros.side_menu(types_ara , action_methods , icons , add_actions ) }} -->
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1> عرض المُلاك السابقين من الأحدث للأقدم </h1>
+            <!-- {{dev_history}} -->
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+
+                <table id="owners" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <!-- <th> الاسم     </th>
+                    <th> رقم السيريال    </th> -->
+                    <th> المالك    </th>
+                    <!-- <th> المكان   </th> -->
+
+
+                  </tr>
+                  </thead>
+                  <tbody>
+
+
+                  {% for time in dev_history %}
+
+                  <tr>
+                    {% if time.id == current_owner_id %}
+
+                    <td> {{time.owner}}  <span style="position: absolute; right: 50%;" class="badge badge-success">المالك الحالى</span> </td>
+
+                    {% else %}
+                    <td> {{time.owner}} </td>
+
+
+                    {% endif %}
+
+
+                  </tr>
+
+                  {% endfor %}
+
+
+
+
+
+
+                  </tfoot>
+                </table>
+              </div>  <!-- /.card-body -->
+            </div>   <!-- /.card -->
+          </div>     <!-- /.col -->
+        </div>       <!-- /.row -->
+      </div>         <!-- /.container-fluid -->
+    </section>       <!-- /.content -->
+  </div>             <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>  <!-- /.control-sidebar -->
+</div>  <!-- ./wrapper -->
+
+
+{{macros.js_scripts()}}
+
+
+<!--
+<script>
+  console.log("WHAT IS here")
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"]
+
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script> -->
+
+
+</body>
+</html>

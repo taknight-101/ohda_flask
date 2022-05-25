@@ -1,0 +1,87 @@
+
+{% import "common.html" as macros with context %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+    {{macros.head("اضافه عهده")}}
+
+    {{macros.navbar()}}
+    {{macros.side_menu()}}
+    <!-- {{ macros.side_menu(types_ara , action_methods , icons , add_actions ) }} -->
+
+
+
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1>بيانات الحساب الشخصي</h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card card-primary">
+                      <div class="card-header">
+                        <h3 class="card-title">تعديل بيانات الحساب الشخصي </h3>
+                      </div>
+                      <form action="{{ url_for('profile') }}" method="POST">
+                      <div class="card-body">
+                        <div class="row">
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1"> username   </label>
+                                  <input type="text" class="form-control" id="exampleInputEmail1"
+                                      placeholder="username" required  autocomplete="off"
+                                      name="username" value="{{username}}">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1"> password </label>
+                                  <input type="text" class="form-control" id="exampleInputEmail1"
+                                      placeholder="password" required  autocomplete="off"
+                                      name="password">
+                              </div>
+                            </div>
+
+
+                      </div>
+                        <!-- /.card-body -->
+
+                        <div class="card-footer">
+                          <button type="submit" class="btn btn-primary"> تعديل </button>
+                        </div>
+                      </form>
+                    </div>
+
+              </div>
+          </div>
+      </div>
+
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">   <!-- Control sidebar content goes here -->
+</aside>  <!-- /.control-sidebar -->
+</div>  <!-- ./wrapper -->
+
+
+{{macros.js_scripts()}}
+</html>
+
+
+
+

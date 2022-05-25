@@ -1,0 +1,85 @@
+{% import "common.html" as macros with context %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    {{macros.head("اضافه مالك جديد")}}
+
+    {{macros.navbar()}}
+    {{macros.side_menu()}}
+    <!-- {{ macros.side_menu(types_ara , action_methods , icons , add_actions ) }} -->
+
+
+    <div class="content-wrapper">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>اضافه مالك جديد </h1>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                              <h3 class="card-title"> {{type}} </h3>
+                            </div>
+                            <form action="{{ url_for('add_new_owner' , id = dev.id) }}" method="POST">
+                            <div class="card-body">
+                              <div class="row">
+                                <input type="hidden" name="type_id" value="{{type}}"/>
+
+
+                                <div class="col-md-6">
+                                    <div class="form-group">
+                                      <label for="exampleInputPassword1"> المكان   </label>
+                                        <!-- <select name="teacher" class="form-control">
+                                          <option value="0"> اختر المكان </option>
+                                          <option value=""> المخزن </option>
+                                          <option value=""> مكتب .... </option>
+
+                                        </select> -->
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Place" required  autocomplete="off"
+                                        name="place" >
+                                        <!-- <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Place" required  autocomplete="off"
+                                        name="place" value="{{dev.place}}"> -->
+                                    </div>
+                                  </div>
+
+                              </div>
+                            </div>
+                              <!-- /.card-body -->
+
+                              <div class="card-footer">
+                                <button type="submit" class="btn btn-primary"> اضافة </button>
+                              </div>
+                            </form>
+                          </div>
+
+                    </div>
+                </div>
+            </div>
+
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">   <!-- Control sidebar content goes here -->
+      </aside>  <!-- /.control-sidebar -->
+    </div>  <!-- ./wrapper -->
+
+
+{{macros.js_scripts()}}
+</html>
+

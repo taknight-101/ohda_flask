@@ -1,0 +1,127 @@
+
+{% import "common.html" as macros with context %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+{{macros.head("الرئيسيه")}}
+
+{{macros.navbar()}}
+
+{{macros.side_menu(userID , types_ara , action_methods, icons , add_actions, role)}}
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0"> جرد {{ store['name']}} بمركز تكنولوجيا الفضاء  </h1>
+          </div> <!-- /.col -->
+
+          <!-- <a class="btn btn-secondary rounded-pill">toggle view</a> -->
+          <a href="{{ url_for('index' , store_id = store.id , toggle = not toggle ) }}" id="toggle" class="btn btn-secondary rounded-pill">toggle view</a>
+        </div>   <!-- /.row -->
+      </div>     <!-- /.container-fluid -->
+    </div>       <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+
+      <section class="content">
+        <div class="container-fluid">
+
+          <div class="row">
+
+
+        {% for type in types_ara %}
+
+            <div class="col-lg-3 col-6">
+
+              <div class="{{classes[loop.index -1]}}">
+                <div class="inner">
+                  <h5> {{type}}  </h5>
+                  <p>كود الصنف : <b>{{code[loop.index -1]}}</b></p>
+                  <p> رقم أمر التوريد : <b>{{import_num[loop.index -1]}}</b></p>
+                  <p>جهة الصرف  : <b>{{source[loop.index -1]}}</b></p>
+                  <p> المصروف  : <b>{{statues[action_methods[loop.index -1]]['masrof']}}</b></p>
+                  <p> يعمل وبالعهده : <b>{{statues[action_methods[loop.index -1]]['works_ohda']}}</b></p>
+                  <p> يعمل وبالمخزن : <b>{{statues[action_methods[loop.index -1]]['works_maghzan']}}</b></p>
+                  <p>لا يعمل وبالمخزن : <b>{{statues[action_methods[loop.index -1]]['not_works_maghzan']}}</b></p>
+                  <p>لا يعمل وبالورشه : <b>{{statues[action_methods[loop.index -1]]['not_works_warsha']}}</b></p>
+                  <p>الباقى من العهده  : <b>{{statues[action_methods[loop.index -1]]['baky']}}</b></p>
+                  <!-- <p>بالورشه : <b>{{statues[action_methods[loop.index -1]]['prepare']}}</b></p> -->
+                  {% if notes[loop.index -1] %}
+
+                  <p>ملاحظات  :- <br><hr>  <b>{{notes[loop.index -1]}}</b></p>
+
+                  {% endif %}
+                  <!-- <h3>53 </h3> -->
+
+
+                </div>
+                <div class="icon">
+                  <i class="{{icons[loop.index -1]}}"></i>
+                </div>
+                <!-- {{userID}} -->
+                <a href="{{ url_for(action_methods[loop.index -1]) }}" class="small-box-footer">جرد بالحالة <i class="fas fa-arrow-circle-right"></i></a>
+                {% if role == 0 or role == 1 %}
+
+                <a href="{{ url_for('edit_cat' , id = ids[loop.index -1], store_id = store['id'])  }}" class="small-box-footer">تعديل الصنف  <i class="fas fa-arrow-circle-left"></i></a>
+                <a href="{{ url_for('del_cat', type = action_methods[loop.index -1] ,  id = ids[loop.index -1] , store_id = store['id'] ) }}" class="small-box-footer">حذف الصنف <i class="fas fa-arrow-circle-left"></i></a>
+                {% endif %}
+              </div>
+            </div>
+
+            {% endfor %}
+
+            {% if not types_ara %}
+            <form action="{{  url_for('add_catagory') }}" method="POST" >
+
+                          <button type="submit" class="btn btn-primary">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-plus" viewBox="0 0 16 16">
+              <path d="M8 4a.5.5 0 0 1 .5.5v3h3a.5.5 0 0 1 0 1h-3v3a.5.5 0 0 1-1 0v-3h-3a.5.5 0 0 1 0-1h3v-3A.5.5 0 0 1 8 4z"></path>
+            </svg>
+            اضافة صنف جديد
+
+                  </button>
+                  <input type="hidden" name="new" value="1">
+
+            <input type="hidden" name="store_id" value="{{store['id']}}">
+
+            <input type="hidden" name="store_name" value="{{store['name']}}">
+
+                      </form>
+
+
+            {% endif %}
+
+
+
+
+          </div>
+    </div> <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+
+
+
+
+{{macros.js_scripts()}}
+
+
+ </body>
+</html>

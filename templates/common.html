@@ -1,0 +1,293 @@
+{% macro head(title) -%}
+
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title> {{title}} </title>
+    <!-- <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,
+          700&display=fallback"> -->
+
+
+    <!-- <link rel="stylesheet" href="https://code.ionicframework.com/ionicons/2.0.1/css/ionicons.min.css"> -->
+    <link rel="stylesheet" href="{{ url_for('static', filename='ionicons.css') }}">
+
+
+
+    <!-- cdn -->
+    <!-- <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.1/css/jquery.dataTables.min.css"/>
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/buttons/2.0.0/css/buttons.dataTables.min.css"/> -->
+
+
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='Devices/plugins/datatables-buttons/css/buttons.bootstrap4.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Devices/dist/css/adminlte.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='Devices/plugins/fontawesome-free/css/all.min.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/mainDateTables.css') }}">
+    <!-- <link rel="stylesheet" href="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.25/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/cr-1.5.4/r-2.2.9/rr-1.2.8/sp-1.3.0/sl-1.3.3/datatables.min.css"> -->
+
+
+  </head>
+
+  {%- endmacro %}
+
+
+  {% macro navbar() -%}
+
+  <!-- Navbar -->
+<body class="hold-transition sidebar-mini">
+  <div class="wrapper">
+
+    <nav class="main-header navbar navbar-expand navbar-white navbar-light">
+      <!-- Left navbar links -->
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
+        </li>
+      </ul>
+
+      <!-- Right navbar links -->
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a class="nav-link" data-widget="fullscreen" href="#" role="button">
+            <i class="fas fa-expand-arrows-alt"></i>
+
+
+
+
+          </a>
+        </li>
+      </ul>
+    </nav>
+    <!-- /.navbar -->
+{%- endmacro %}
+
+
+
+
+
+
+  {% macro side_menu(userID , types_ara , action_methods , icons , add_actions , role) -%}
+
+  <!-- Main Sidebar Container -->
+  <aside class="main-sidebar sidebar-dark-primary elevation-4">
+    <!-- Brand Logo -->
+    <a class="brand-link">
+<!--
+      <img src="{{ url_for('static', filename='Devices/dist/img/AdminLTELogo.png') }}" alt="AdminLTE Logo" class="brand-image img-circle elevation-3"
+            style="opacity: .8"> -->
+      <span class="brand-text font-weight-light" style=" margin-left : 2.5rem"> تنفيذ مكتب النظم </span>
+      <a style=" color : rgb(238, 234, 234); font-size: 1rem ; margin-left : 6rem ; padding : 0.3rem ; border-bottom: rgb(213, 228, 171) 0.5rem  solid; border-radius: 1rem;" href="{{url_for('profile')}}"> <b>بروفايل  </b> </a>
+      <br>
+
+      <hr>
+
+      <a style=" color : wheat; font-size: 1.5rem ; margin-left : 6rem" href="{{url_for('logout')}}"> خروج  </a>
+      <br>
+      <hr>
+    </a>
+
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel mt-3 pb-3 mb-3 d-flex">
+        <div class="image">
+
+          <img src="{{ url_for('static', filename='img/logo.png') }}" style="margin-left : 4rem ;width: 5rem;" class="img-circle elevation-2" alt="STC">
+        </div>
+        <div class="info">
+          <!-- <a href="#" class="d-block"> Welcome Osama  </a> -->
+        </div>
+      </div>
+
+      <!-- Sidebar Menu -->
+     <nav class="mt-2">
+          <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu"
+              data-accordion="false">
+            <li class="nav-item menu-open">
+
+              <a href="{{ url_for('root') }}" class="nav-link active">
+                <i class="nav-icon fas fa-home"></i>
+                <p> الرئيسيه </p>
+
+              </a>
+            </li>
+
+            {% if role == 0 %}
+
+            <li class="nav-item menu-open">
+
+              <a href="{{ url_for('assign_role') }}" class="nav-link active">
+                <i class="nav-icon fas fa-male"></i>
+                <p> تعيين مسؤولي العهده </p>
+
+              </a>
+            </li>
+
+            {% endif %}
+
+
+            <li class="nav-item">
+
+
+
+              {% if action_methods %}
+
+
+              <a href="all-centers.html" class="nav-link">
+                <i class="fas fa-hospital-alt"></i>
+                <p>
+                      الاصناف
+                  <i class="fas fa-angle-left right"></i>
+                </p>
+              </a>
+
+              {% endif %}
+
+              <ul class="nav nav-treeview">
+
+                {% if userID == 1 %}
+
+                <li class="nav-item">
+                  <a href="{{ url_for('add_catagory') }} " class="nav-link">
+                    <i class="fas fa-calendar-plus"></i>
+                    <p>اضافة صنف جديد</p>
+                    <!-- {{types_ara}} -->
+                  </a>
+                </li>
+
+                {% endif %}
+                <!-- ahmed -->
+
+             {% if types_ara and  action_methods and icons and add_actions %}
+
+
+
+
+          {% for type in types_ara %}
+
+          <li class="nav-item">
+            <a href="#" class="nav-link">
+              <i class="{{icons[loop.index -1]}}"></i>
+              <p>
+                 {{type}}
+                <i class="fas fa-angle-left right"></i>
+              </p>
+            </a>
+            <ul class="nav nav-treeview">
+              <li class="nav-item">
+                <a href="{{ url_for(action_methods[loop.index -1]) }}" class="nav-link">
+                  <i class="fas fa-eye nav-icon"></i>
+                  <p> جرد بالحاله </p>
+                </a>
+              </li>
+
+              {% if role == 0 or role == 1 %}
+              <li class="nav-item">
+                <a href="{{ url_for(add_actions[loop.index -1])}} " class="nav-link">
+                  <i class="fas fa-cart-plus nav-icon"></i>
+                  <p>اضافه للعهده </p>
+                </a>
+              </li>
+
+              {% endif %}
+
+            </ul>
+          </li>
+
+          {% endfor %}
+
+
+          {% endif %}
+                </li>
+              </ul>
+            </li>
+
+
+
+
+
+
+        </nav>    <!-- /.sidebar-menu -->
+      </div>      <!-- /.sidebar -->
+    </aside>
+
+
+{%- endmacro %}
+
+
+
+
+
+
+{% macro js_scripts() -%}
+<script src="{{ url_for('static', filename='Devices/plugins/chart.js/Chart.min.js') }}"></script>
+<script src="{{ url_for('static', filename='Devices/plugins/jquery/jquery.min.js') }}"></script>
+
+<script src="{{ url_for('static', filename='Devices/plugins/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+<script src="{{ url_for('static', filename='Devices/dist/js/adminlte.js') }}"></script>
+<script src="{{ url_for('static', filename='Devices/dist/js/pages/dashboard3.js') }}"></script>
+
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/1.11.1/js/jquery.dataTables.min.js"> </script> -->
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/v/bs4/jszip-2.5.0/dt-1.10.25/b-1.7.1/b-colvis-1.7.1/b-html5-1.7.1/b-print-1.7.1/cr-1.5.4/r-2.2.9/rr-1.2.8/sp-1.3.0/sl-1.3.3/datatables.min.js"> </script> -->
+<script type="text/javascript" src="{{ url_for('static', filename='js/mainDateTables.js') }}"> </script>
+<!-- <script type="text/javascript" src="https://cdn.datatables.net/buttons/2.0.0/js/dataTables.buttons.min.js"> </script> -->
+
+
+<!-- <script type="text/javascript" src="https://unpkg.com/pdfmake@0.2.2/build/pdfmake.js"> </script>
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.66/vfs_fonts.js"></script> -->
+
+
+<!-- <script src="../../plugins/pdfmake/pdfmake.min.js"></script>
+<script src="../../plugins/pdfmake/vfs_fonts.js"></script> -->
+
+<script src="{{ url_for('static', filename='Devices/plugins/datatables-buttons/js/buttons.bootstrap4.min.js') }}"></script>
+<script src="{{ url_for('static', filename='Devices/plugins/datatables-buttons/js/buttons.html5.min.js') }}"></script>
+<script src="{{ url_for('static', filename='Devices/plugins/datatables-buttons/js/buttons.print.min.js') }}"></script>
+<!-- <script src="{{ url_for('static', filename='Devices/plugins/datatables-buttons/js/buttons.colVis.min.js') }}"></script> -->
+<!-- <script src="https://cdn.datatables.net/colvis/1.1.2/js/dataTables.colVis.min.js"></script> -->
+
+
+
+
+<script src="{{ url_for('static', filename='Devices/dist/js/demo.js') }}"></script>
+
+
+
+<script>
+  // console.log("WHAT IS here")
+  console.log( $("#example1"))
+  $(function () {
+    console.log($("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      buttons: ["copy", "excel",  "print", "colvis"]
+
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)'));
+
+
+    $("#owners").DataTable({
+      "bSort": false,
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      buttons: ["copy", "excel",  "print", "colvis"]
+
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+
+{%- endmacro %}
+
+    <!-- all-lesson is the ref for js scripts -->
+
+
+

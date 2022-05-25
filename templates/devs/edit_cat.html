@@ -1,0 +1,20 @@
+{% import "common.html" as macros with context %}
+{% import "edit_cat_temp.html" as edit_cat_temp with context %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    {{macros.head("اضافه عهده")}}
+
+    {{macros.navbar()}}
+    {{macros.side_menu()}}
+    <!-- {{ macros.side_menu(types_ara , action_methods , icons , add_actions ) }} -->
+
+
+    {{edit_cat_temp.editCat(name_en ,name ,id, code , import_num , source , notes , store_id )}}
+
+
+{{macros.js_scripts()}}
+</html>
+

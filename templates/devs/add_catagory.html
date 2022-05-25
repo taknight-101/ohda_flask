@@ -1,0 +1,38 @@
+{% import "common.html" as macros with context %}
+{% import "add_catagory_temp.html" as add_catagory_temp with context %}
+
+<!DOCTYPE html>
+<html lang="en">
+
+{{macros.head("اضافة صنف جديد")}}
+
+{{macros.navbar()}}
+
+{{macros.side_menu()}}
+<!-- {{ macros.side_menu(types_ara , action_methods , icons , add_actions ) }} -->
+
+
+{{add_catagory_temp.add_catagory()}}
+
+
+{{macros.js_scripts()}}
+
+<script>
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      "buttons": ["copy", "csv", "excel", "pdf", "print", "colvis"]
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script>
+</body>
+</html>

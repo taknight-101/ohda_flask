@@ -1,0 +1,100 @@
+{% macro editCat(name_en , name , id , code , import_num , source , notes, store_id ) -%}
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>تعديل صنف </h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                          <h3 class="card-title"> {{name}} </h3>
+                        </div>
+                        <form action="{{ url_for('edit_cat' , id = id , store_id = store_id) }}" method="POST">
+                        <div class="card-body">
+                          <div class="row">
+                            <input type="hidden" name="type_id" value="{{id}}"/>
+                            <input type="hidden" name="name_en" value="{{name_en}}"/>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> اسم الصنف </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Name" required  autocomplete="off"
+                                        name="name" value="{{name}}">
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> كود الصنف </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Code" required  autocomplete="off"
+                                        name="code" value="{{code}}">
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> رقم أمر التوريد </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Name" required  autocomplete="off"
+                                        name="import_num" value="{{import_num}}">
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> جهة الصرف </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Source" required  autocomplete="off"
+                                        name="source" value="{{source}}">
+                                </div>
+                              </div>
+
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> ملاحظات   </label>
+
+                                    <textarea name="notes"  placeholder="Notes" class="form-control" id="exampleFormControlTextarea1" rows="3">{{notes}}</textarea>
+                                    <!-- <input type="textarea" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Notes" required  autocomplete="off"
+                                        name="notes"> -->
+                                </div>
+                              </div>
+
+
+                        </div>
+                          <!-- /.card-body -->
+
+                          <div class="card-footer">
+                            <button type="submit" class="btn btn-primary"> تعديل </button>
+                          </div>
+                        </form>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">   <!-- Control sidebar content goes here -->
+  </aside>  <!-- /.control-sidebar -->
+</div>  <!-- ./wrapper -->
+{%- endmacro %}
+
+
+
+

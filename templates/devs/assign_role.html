@@ -1,0 +1,207 @@
+{% import "common.html" as macros with context %}
+{% import "add_temp.html" as add_temp with context %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+    {{macros.head("تعيين مسؤولي العهده ")}}
+
+    {{macros.navbar()}}
+
+    {{macros.side_menu()}}
+    <!-- {{ macros.side_menu(types_ara , action_methods , icons , add_actions ) }} -->
+
+
+
+    <div class="content-wrapper">
+        <section class="content-header">
+          <div class="container-fluid">
+            <div class="row mb-2">
+              <div class="col-sm-6">
+                <h1>تعيين مسؤولي العهده  </h1>
+              </div>
+              <div class="col-sm-6">
+                <h3>مسؤولي العهده الحاليين  </h1>
+                  {% if ohda_officer and ohda_amin %}
+                  <label for="exampleInputEmail1">  ظابط العهده : <span  style="color: green;">{{ohda_officer['username']}}</span></label>
+                  <br>
+                  <hr>
+                 <label for="exampleInputEmail1">    أمين العهده : <span  style="color: green;">{{ohda_amin['username']}}</span></label>
+
+
+
+                  {% else %}
+
+
+                  <label for="exampleInputEmail1">  لم يتم التعيين بعد </label>
+
+
+
+                  {% endif %}
+
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Main content -->
+        <section class="content">
+            <div class="container-fluid">
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="card card-primary">
+                            <div class="card-header">
+                              <h3 class="card-title"> ظابط العهده </h3>
+                            </div>
+                            <form action="{{url_for('root')}}" method="POST">
+                            <div class="card-body">
+                              <div class="row">
+                                <!-- <input type="hidden" name="type_id" value="{{type}}"/> -->
+
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> username</label>
+
+                                        {% if ohda_officer and ohda_amin %}
+
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            placeholder="username" required  autocomplete="off"
+                                            name="officer_username" value="{{ohda_officer['username']}}">
+                                            <input type="hidden" name="ohda_officer_exists" value="1">
+
+                                            {% else %}
+
+                                            <input type="text" class="form-control" id="exampleInputEmail1"
+                                            placeholder="username" required  autocomplete="off"
+                                            name="officer_username">
+
+
+                                            {% endif %}
+
+                                    </div>
+                                  </div>
+
+                                  <div class="col-md-6">
+                                    <div class="form-group">
+                                        <label for="exampleInputEmail1"> password </label>
+                                        <input type="text" class="form-control" id="exampleInputEmail1"
+                                            placeholder="password" required  autocomplete="off"
+                                            name="officer_password">
+                                    </div>
+                                  </div>
+                                  {% for store in stores %}
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="store_ohda_officer" value="{{store['id']}}" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                      {{store['name']}}
+                                      <!-- <input type="hidden" name="{{store['name']}}" value="{{store['id']}}"> -->
+                                      <!-- <input type="hidden" name="{{store['name']}}" value="{{store['id']}}"> -->
+                                    </label>
+                                  </div>
+                                  <span style="margin: 0 1rem;" >&#124;</span>
+
+                                  {% endfor %}
+
+
+
+                                <!-- <div class="col-md-6">
+                                  <div class="form-group">
+                                    <label for="exampleInputPassword1">   الحاله  </label>
+                                      <select name="status" class="form-control" required>
+                                        <option value="0"> اختر الحاله </option>
+                                        <option value="1"> تعمل  </option>
+                                        <option value="2"> لا تعمل  </option>
+                                        <option value="3"> صيانه </option>
+                                      </select>
+                                  </div>
+                                </div> -->
+
+
+
+
+
+
+                              </div>
+                            </div>
+
+
+                            <div class="col-md-12">
+                              <div class="card card-primary">
+                          <div class="card-header">
+                            <h3 class="card-title"> امين العهده </h3>
+                          </div>
+                          <div class="card-body">
+                            <div class="row">
+
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="exampleInputEmail1"> username  </label>
+
+
+                                          {% if ohda_officer and ohda_amin %}
+
+                                          <input type="text" class="form-control" id="exampleInputEmail1"
+                                              placeholder="username" required  autocomplete="off"
+                                              name="amin_officer_username" value="{{ohda_amin['username']}}">
+                                              <input type="hidden" name="ohda_amin_exists" value="1">
+
+                                              {% else %}
+
+                                                <input type="text" class="form-control" id="exampleInputEmail1"
+                                                placeholder="username" required  autocomplete="off"
+                                                name="amin_officer_username">
+
+
+                                              {% endif %}
+                                  </div>
+                              </div>
+                              <div class="col-md-6">
+                                  <div class="form-group">
+                                      <label for="exampleInputEmail1"> password  </label>
+                                      <input type="text" class="form-control" id="exampleInputEmail1"
+                                          placeholder="password" required  autocomplete="off"
+                                          name="amin_officer_password">
+                                  </div>
+                              </div>
+                              {% for store in stores %}
+                                  <div class="form-check">
+                                    <input class="form-check-input" type="checkbox" name="store_ohda_amin" value="{{store['id']}}" id="flexCheckDefault">
+                                    <label class="form-check-label" for="flexCheckDefault">
+                                      {{store['name']}}
+                                      <!-- <input type="hidden" name="{{store['name']}}" value="{{store['id']}}"> -->
+                                      <!-- <input type="hidden" name="{{store['name']}}" value="{{store['id']}}"> -->
+                                    </label>
+                                  </div>
+                                  <span style="margin: 0 1rem;" >&#124;</span>
+
+                                  {% endfor %}
+
+
+                            </div>
+                          </div>
+                              <!-- /.card-body -->
+
+                              <div class="card-footer">
+                                <button type="submit" class="btn btn-primary"> تعيين </button>
+                              </div>
+                            </form>
+                          </div>
+
+                    </div>
+                </div>
+            </div>
+
+          <!-- /.container-fluid -->
+        </section>
+        <!-- /.content -->
+      </div>
+
+      <!-- Control Sidebar -->
+      <aside class="control-sidebar control-sidebar-dark">   <!-- Control sidebar content goes here -->
+      </aside>  <!-- /.control-sidebar -->
+    </div>  <!-- ./wrapper -->
+
+{{macros.js_scripts()}}
+</html>
+

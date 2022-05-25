@@ -1,0 +1,87 @@
+
+{% import "common.html" as macros with context %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+{{macros.head("الرئيسيه")}}
+
+{{macros.navbar()}}
+
+{{macros.side_menu(userID , None , None, None  , None , role)}}
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0"> عهدة مركز تكنولوجيا الفضاء  </h1>
+          </div> <!-- /.col -->
+        </div>   <!-- /.row -->
+      </div>     <!-- /.container-fluid -->
+    </div>       <!-- /.content-header -->
+
+    <!-- Main content -->
+    <div class="content">
+
+      <section class="content">
+        <div class="container-fluid">
+
+          <div class="row">
+
+
+        {% for store in stores %}
+
+            <div class="col-lg-3 col-6">
+
+              <div class="small-box bg-primary">
+                <div class="inner">
+                  <h5> {{store['name']}}  </h5>
+
+
+
+                </div>
+
+                <a href="{{ url_for('index' , store_id = store['id'] ) }}" class="small-box-footer">جرد بالحالة <i class="fas fa-arrow-circle-right"></i></a>
+
+              </div>
+            </div>
+
+            {% endfor %}
+
+            {% if not stores %}
+
+            <h5> غير مُصرح لعرض بيانات أى مخزن بعد. تواصل مع مسؤول مراقبة العهدة  </h5>
+
+            {% endif %}
+
+
+
+
+          </div>
+    </div> <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+
+
+
+
+{{macros.js_scripts()}}
+
+
+ </body>
+</html>

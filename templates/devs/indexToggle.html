@@ -1,0 +1,208 @@
+
+{% import "common.html" as macros with context %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+
+
+{{macros.head("الرئيسيه")}}
+
+{{macros.navbar()}}
+
+{{macros.side_menu(userID , types_ara , action_methods, icons , add_actions, role)}}
+
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+
+    <!-- Content Header (Page header) -->
+    <div class="content-header">
+
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1 class="m-0"> جرد {{ store['name']}} بمركز تكنولوجيا الفضاء  </h1>
+          </div> <!-- /.col -->
+
+          <!-- <a class="btn btn-secondary rounded-pill">toggle view</a> -->
+          <a href="{{ url_for('index' , store_id = store.id , toggle = not toggle ) }}" id="toggle" class="btn btn-secondary rounded-pill">toggle view</a>
+        </div>   <!-- /.row -->
+      </div>     <!-- /.container-fluid -->
+    </div>       <!-- /.content-header -->
+
+
+    <!-- sighhhhhhhhhhhhhhhhh -->
+
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+
+                <table id="example22" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+
+
+
+                    <th> اسم الصنف      </th>
+                    <th> كود الصنف      </th>
+                    <th> رقم أمر التوريد   </th>
+
+                    <th> جهة الصرف   </th>
+                    <th>  المصروف  </th>
+                    <th>   يعمل وبالعهده    </th>
+                    <th>    يعمل وبالمخزن    </th>
+
+                    <th>     لا يعمل وبالمخزن </th>
+                    <th>    لا يعمل وبالورشه    </th>
+
+                    <th> الباقى من العهده    </th>
+
+
+                    <th> ملاحظات   </th>
+
+
+                    <th> خيارات  </th>
+
+
+
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  {% for type in types_ara %}
+
+                  <tr>
+                    <td> {{type}}  </td>
+
+
+                    <td> {{code[loop.index -1]}} </td>
+
+                    <td> {{import_num[loop.index -1]}} </td>
+                    <td> {{source[loop.index -1]}} </td>
+
+                    <td> {{statues[action_methods[loop.index -1]]['masrof']}} </td>
+                    <td>
+
+                      {{statues[action_methods[loop.index -1]]['works_ohda']}}
+
+                    </td>
+                    <td>
+
+
+
+
+                      {{statues[action_methods[loop.index -1]]['works_maghzan']}}
+
+                    </td>
+
+                    <td>
+                      {{statues[action_methods[loop.index -1]]['not_works_maghzan']}}
+                    </td>
+
+                    <td>
+
+                      {{statues[action_methods[loop.index -1]]['not_works_warsha']}}
+
+                    </td>
+
+                    <!-- ahmed yo -->
+
+                    <td> {{statues[action_methods[loop.index -1]]['baky']}} </td>
+
+
+                    <td>
+
+                      {% if notes[loop.index -1] %}
+
+                     <b>{{notes[loop.index -1]}}</b></p>
+
+                      {% endif %}
+
+                    </td>
+
+
+
+
+                    <td class="text-center" >
+                      <a href="{{ url_for(action_methods[loop.index -1]) }}" class="small-box-footer">جرد بالحالة <i class="fas fa-arrow-circle-right"></i></a>
+                      {% if role == 0 or role == 1 %}
+
+                        <br>
+                        <hr>
+                      <a href="{{ url_for('edit_cat' , id = ids[loop.index -1], store_id = store['id'])  }}" class="small-box-footer">تعديل الصنف  <i class="fas fa-arrow-circle-left"></i></a>
+                      <br>
+                      <hr>
+                      <a href="{{ url_for('del_cat', type = action_methods[loop.index -1] ,  id = ids[loop.index -1] , store_id = store['id'] ) }}" class="small-box-footer">حذف الصنف <i class="fas fa-arrow-circle-left"></i></a>
+                      {% endif %}
+
+
+                    </td>
+
+                  </tr>
+
+                  {% endfor %}
+
+
+
+
+
+
+                  </tfoot>
+                </table>
+              </div>  <!-- /.card-body -->
+            </div>   <!-- /.card -->
+          </div>     <!-- /.col -->
+        </div>       <!-- /.row -->
+      </div>         <!-- /.container-fluid -->
+    </section>
+
+
+    <!-- sighhhhhhhhhhhhhhhhh -->
+
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>
+  <!-- /.control-sidebar -->
+</div>
+
+
+
+
+{{macros.js_scripts()}}
+
+<script>
+  // sigh
+
+  // console.log("WHAT IS here")
+
+  $(function () {
+
+
+
+    $("#example22").DataTable({
+      "bSort": false,
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      buttons: ["copy", "excel",  "print", "colvis"],
+      "paging": true,
+      "lengthChange": false,
+      "searching": true,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+
+    }).buttons().container().appendTo('#example22_wrapper .col-md-6:eq(0)');
+
+  });
+</script>
+
+ </body>
+</html>

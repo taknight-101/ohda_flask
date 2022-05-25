@@ -1,0 +1,129 @@
+{% macro add_catagory() -%}
+
+
+<div class="content-wrapper">
+  <section class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col-sm-6">
+          <h1> اضافة صنف جديد </h1>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Main content -->
+  <section class="content">
+      <div class="container-fluid">
+          <div class="row">
+              <div class="col-md-12">
+                  <div class="card card-primary">
+                      <div class="card-header">
+                        <h3 class="card-title">بيانات الصنف </h3>
+                      </div>
+                      <form action="" method="POST">
+                      <div class="card-body">
+                        <div class="row">
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1"> اسم الصنف بالأنجليزي </label>
+                                  <input type="text" class="form-control" id="exampleInputEmail1"
+                                      placeholder="English" required  autocomplete="off"
+                                      name="name_en">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1"> اسم الصنف بالعربى </label>
+                                  <input type="text" class="form-control" id="exampleInputEmail1"
+                                      placeholder="Arabic" required  autocomplete="off"
+                                      name="name_ara">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1"> كود الصنف   </label>
+                                  <input type="text" class="form-control" id="exampleInputEmail1"
+                                      placeholder="Code" required  autocomplete="off"
+                                      name="code">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1"> رقم أمر التوريد   </label>
+                                  <input type="text" class="form-control" id="exampleInputEmail1"
+                                      placeholder="Import#" required  autocomplete="off"
+                                      name="import_num">
+                              </div>
+                            </div>
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                  <label for="exampleInputEmail1"> جهة الصرف   </label>
+                                  <input type="text" class="form-control" id="exampleInputEmail1"
+                                      placeholder="Source" required  autocomplete="off"
+                                      name="source">
+                              </div>
+                            </div>
+
+                          <div class="col-md-6">
+                            <!-- <div class="form-group">
+                              <label for="exampleInputPassword1">  ايقونه  </label>
+                                <select name="icon" class="form-control" required>
+                                  <option value="0"> Choose Icon </option>
+                                  <option value=""> One Year  </option>
+                                  <option value=""> Secand Year  </option>
+                                  <option value=""> Third Year   </option>
+                                </select>
+                            </div> -->
+                            <input type="hidden" name="icon" value="ion-compose">
+                            <input type="hidden" name="store_id" value="{{store_id}}">
+                            <input type="hidden" name="store_name" value="{{store_name}}">
+
+                            <div class="form-group">
+                              <label for="exampleInputPassword1">  لون  </label>
+                                <select name="cls" class="form-control" required>
+                                  <option value="0"> Choose Color </option>
+                                  <option value="small-box bg-secondary"> أزرق
+                                   </option>
+                                  <option value="small-box bg-success"> أخضر </option>
+                                  <option value="small-box bg-danger"> أحمر  </option>
+                                  <option value="small-box bg-warning"> أصفر </option>
+                                  <option value="small-box bg-info"> لبنى </option>
+                                  <option value="small-box bg-light"> فاتح  </option>
+                                  <option value="small-box bg-dark"> أسود  </option>
+                                  <option value="small-box bg-white"> أبيض </option>
+                                </select>
+                            </div>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="exampleInputEmail1"> ملاحظات   </label>
+                                <textarea name="notes" placeholder="Notes" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                                <!-- <input type="textarea" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Notes" required  autocomplete="off"
+                                    name="notes"> -->
+                            </div>
+                          </div>
+
+                        </div>
+                      </div>
+                        <!-- /.card-body -->
+                        <div class="card-footer">
+                          <button type="submit" class="btn btn-primary"> اضافه </button>
+                        </div>
+                      </form>
+                    </div>
+              </div>
+          </div>
+      </div>
+    <!-- /.container-fluid -->
+  </section>
+  <!-- /.content -->
+</div>
+
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">   <!-- Control sidebar content goes here -->
+</aside>  <!-- /.control-sidebar -->
+</div>  <!-- ./wrapper -->
+
+{%- endmacro %}

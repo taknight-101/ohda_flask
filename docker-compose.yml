@@ -1,0 +1,43 @@
+version: "3"
+services:
+    server:
+        build: .
+        ports:
+            - "6000:5000"
+        volumes:
+            - .:/ohda
+        # environment:
+        #   - DB_URL="//db/flask"
+
+        links:
+            - db
+        depends_on:
+            - "db"
+    db:
+        # image: mysql:5.7
+        build:
+            context: data_base
+
+        ports:
+            - "30000:3306"
+        environment:
+            MYSQL_ROOT_PASSWORD: root
+            # environment:
+            # - MYSQL_USER=ahmed
+            # - MYSQL_DATABASE=flask
+            # - MYSQL_ALLOW_EMPTY_PASSWORD=yes
+        volumes:
+             - ./db:/docker-entrypoint-initdb.d/:ro
+        # command: mysql -u root -p flask < flask_final.sql
+
+
+
+        # build:
+        #     context: .
+        #     dockerfile: ./data_base/db.Dockerfile
+        # ports:
+        #     - "3306:3306"
+        # environment:
+        #     MYSQL_ROOT_PASSWORD: root
+        # volumes:
+        #     - ./db:/docker-entrypoint-initdb.d/:ro

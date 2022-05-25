@@ -1,0 +1,153 @@
+
+{% macro showDev(type , userID,store_name) -%}
+
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1> {{type}} </h1>
+
+          </div>
+        </div>
+      </div><!-- /.container-fluid -->
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+      <div class="container-fluid">
+        <div class="row">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+
+                <table id="example1" class="table table-bordered table-striped">
+                  <thead>
+                  <tr>
+                    <th> الاسم     </th>
+                    <th> رقم السيريال    </th>
+
+                    <th>  تاريخ الصرف    </th>
+                    <th>  المصروف اليه     </th>
+                    <th>   رقم اذن الصرف     </th>
+                    <th>      طالب الصرف    </th>
+                    <th>       اذن الصرف   </th>
+                    <th>     193     </th>
+
+                    <th> الحاله    </th>
+                    <th> المالك   </th>
+                    {% if userID == 1 %}
+                    <th> خيارات  </th>
+
+                    {% endif %}
+
+                  </tr>
+                  </thead>
+                  <tbody>
+
+                  {% for dev in data %}
+
+                  <tr>
+                    <td> {{dev.name}} </td>
+                    <td> {{dev.sn}} </td>
+
+                    <td> {{dev.date}} </td>
+                    <td> {{dev.destination}} </td>
+                    <td> {{dev.permit_num}} </td>
+                    <td>
+
+                      {% if dev.permit_requester %}
+
+                      <a class="btn btn-primary" href="http://localhost:3001/uploads/{{store_name + ',' + type + ',' + dev.permit_requester }} " >{{dev.permit_requester}} </a>
+
+                      {% else %}
+                      <button class="btn btn-dark" disabled >لا يوجد مرُفق</a>
+                      {% endif %}
+
+
+                    </td>
+                    <td>
+
+
+
+
+                      {% if dev.permit_request %}
+
+                      <a class="btn btn-primary" href="http://localhost:3001/uploads/{{store_name + ',' + type + ',' + dev.permit_request }} " >{{dev.permit_request}} </a>
+
+                      {% else %}
+                      <button class="btn btn-dark" disabled >لا يوجد مرُفق</a>
+                      {% endif %}
+                    </td>
+
+                    <td>
+
+                      {% if dev.file_193 %}
+
+                      <a class="btn btn-primary" href="http://localhost:3001/uploads/{{store_name + ',' + type + ',' + dev.file_193 }}" >{{dev.file_193}}</a>
+
+                      {% else %}
+                      <button class="btn btn-dark" disabled >لا يوجد مرُفق</a>
+                      {% endif %}
+                    </td>
+
+                    <td> {{ 'يعمل وبالعهده' if dev.status == '1' else 'يعمل وبالمخزن ' if dev.status == '2' else 'لا يعمل وبالمخزن'  if dev.status == '3' else 'لا يعمل وبالورشه' }} </td>
+
+                    <!-- ahmed yo -->
+                    <!-- <td> {{dev.place}}  </td> -->
+                    <td> {{dev.place}}  </td>
+
+
+
+                    {% if userID == 1 %}
+                    <td class="text-center" >
+                      <a href="{{ url_for('edit_dev' , id = dev.id , store_id = dev.store_id) }} " class="btn btn-success btn-sm">
+                        <i class="fas fa-edit"></i>   تعديل
+                      </a>
+
+                      <a href="{{ url_for('del_dev' , type = dev.type_id ,id = dev.id) }} " class="btn btn-danger btn-sm" style="margin-top: 5px;">
+                        <i class="fas fa-trash"></i>
+                      </a>
+
+                      <hr>
+                      <a href="{{ url_for('add_new_owner' , id = dev.id) }} " class="btn btn-success btn-sm">
+                        <i class="fas fa-edit"></i>  اضافه مالك جديد
+                      </a>
+
+                      <a href="{{ url_for('show_owners' , id = dev.id) }} " class="btn btn-success btn-sm" style="margin-top: 5px;" >
+                        <i class="fas "></i>  المُلاك السابقين
+                      </a>
+
+
+                    </td>
+                    {% endif %}
+                  </tr>
+
+                  {% endfor %}
+
+
+
+
+
+
+                  </tfoot>
+                </table>
+              </div>  <!-- /.card-body -->
+            </div>   <!-- /.card -->
+          </div>     <!-- /.col -->
+        </div>       <!-- /.row -->
+      </div>         <!-- /.container-fluid -->
+    </section>       <!-- /.content -->
+  </div>             <!-- /.content-wrapper -->
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Control sidebar content goes here -->
+  </aside>  <!-- /.control-sidebar -->
+</div>  <!-- ./wrapper -->
+
+{%- endmacro %}
+

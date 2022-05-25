@@ -1,0 +1,154 @@
+{% macro editDev(type , dev) -%}
+
+
+<div class="content-wrapper">
+    <section class="content-header">
+      <div class="container-fluid">
+        <div class="row mb-2">
+          <div class="col-sm-6">
+            <h1>تعديل العهده </h1>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Main content -->
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card card-primary">
+                        <div class="card-header">
+                          <h3 class="card-title"> {{type}} </h3>
+                        </div>
+                        <form action="{{ url_for('edit_dev' , id = dev.id , store_id = dev.store_id ) }}" method="POST" enctype=multipart/form-data>
+                        <div class="card-body">
+                          <div class="row">
+                            <input type="hidden" name="type_id" value="{{type}}"/>
+                              <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> الاسم </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Name" required  autocomplete="off"
+                                        name="name" value="{{dev.name}}">
+                                </div>
+                              </div>
+
+                            <div class="col-md-6">
+                              <div class="form-group">
+                                <label for="exampleInputPassword1">   الحاله  </label>
+                                  <select name="status" class="form-control" required>
+                                    <option value="0" > اختر الحاله </option>
+                                    <option value="1" {{ 'selected' if dev.status =="1" else '' }}> يعمل وبالعهده  </option>
+                                    <option value="2" {{ 'selected' if dev.status =="2" else '' }}> يعمل وبالمخزن   </option>
+                                    <option value="3" {{ 'selected' if dev.status =="3" else '' }}> لا يعمل وبالمخزن </option>
+                                    <option value="4" {{ 'selected' if dev.status =="4" else '' }}> لا يعمل وبالورشه </option>
+                                  </select>
+                              </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> SN </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Serial number" required  autocomplete="off"
+                                        name="sn" value="{{dev.sn}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> تاريخ الصرف </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Date" required  autocomplete="off"
+                                        name="date" value="{{dev.date}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> المصروف اليه </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="Destination" required  autocomplete="off"
+                                        name="destination" value="{{dev.destination}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                    <label for="exampleInputEmail1"> رقم اذن الصرف </label>
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                        placeholder="permission#" required  autocomplete="off"
+                                        name="permit_num" value="{{dev.permit_num}}">
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-label" for="customFile">طالب الصرف</label>
+                                  <div class="input-group">
+                                    <input type="file" class="form-control" id="customFile" name="permit_requester"  />
+
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-label" for="customFile">اذن الصرف </label>
+                                  <div class="input-group">
+                                    <input type="file" class="form-control" id="customFile" name="permit_request" />
+
+                                  </div>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label class="form-label" for="customFile"> 193 </label>
+                                  <div class="input-group">
+                                    <input type="file" class="form-control" id="customFile" name="file_193" />
+
+                                  </div>
+                                </div>
+                            </div>
+
+
+                            <div class="col-md-6">
+                                <div class="form-group">
+                                  <label for="exampleInputPassword1"> المكان   </label>
+                                    <!-- <select name="teacher" class="form-control">
+                                      <option value="0"> اختر المكان </option>
+                                      <option value=""> المخزن </option>
+                                      <option value=""> مكتب .... </option>
+
+                                    </select> -->
+                                    <input type="text" class="form-control" id="exampleInputEmail1"
+                                    placeholder="Place" required  autocomplete="off"
+                                    name="place" value="{{dev.place}}">
+                                </div>
+                              </div>
+
+                          </div>
+                        </div>
+                          <!-- /.card-body -->
+
+                          <div class="card-footer">
+                            <button type="submit" class="btn btn-primary"> تعديل </button>
+                          </div>
+                        </form>
+                      </div>
+
+                </div>
+            </div>
+        </div>
+
+      <!-- /.container-fluid -->
+    </section>
+    <!-- /.content -->
+  </div>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">   <!-- Control sidebar content goes here -->
+  </aside>  <!-- /.control-sidebar -->
+</div>  <!-- ./wrapper -->
+{%- endmacro %}
+
+
+
+

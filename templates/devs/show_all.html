@@ -1,0 +1,46 @@
+{% import "common.html" as macros with context %}
+{% import "show_all_temp.html" as show_all_temp with context %}
+
+
+<!DOCTYPE html>
+<html lang="en">
+<!-- what is happening -->
+{{macros.head("جرد")}}
+
+{{macros.navbar()}}
+
+{{macros.side_menu()}}
+
+<!-- {{ macros.side_menu(types_ara , action_methods , icons , add_actions ) }} -->
+
+{{show_all_temp.showDev(type , userID ,store_name )}}
+
+{{macros.js_scripts()}}
+
+
+<!--
+<script>
+  console.log("WHAT IS here")
+  $(function () {
+    $("#example1").DataTable({
+      "responsive": true, "lengthChange": false, "autoWidth": false,
+      buttons: ["copy", "csv", "excel", "pdf", "print", "colvis"]
+
+    }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+
+
+    $('#example2').DataTable({
+      "paging": true,
+      "lengthChange": false,
+      "searching": false,
+      "ordering": true,
+      "info": true,
+      "autoWidth": false,
+      "responsive": true,
+    });
+  });
+</script> -->
+
+
+</body>
+</html>
