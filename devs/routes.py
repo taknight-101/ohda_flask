@@ -36,10 +36,9 @@ def robust_s_remove(text):
             text = text[::-1]
             return text
 
-    # print("hi" , ind)
     ind = len(text) - 1 - ind
     text = text[::-1]
-    # print(text[:ind])
+
     return text[:ind]
 
 
@@ -54,13 +53,6 @@ def allowed_file(filename):
 
 class ExampleForm(Form):
     dt = DateField('DatePicker', format='%Y-%m-%d')
-
-# @app.route('/dateField', methods=['POST','GET'])
-# def hello_world():
-#     form = ExampleForm()
-#     if form.validate_on_submit():
-#         return form.dt.data.strftime('%Y-%m-%d')
-#     return render_template('devs/example.html', form=form)
 
 
 class Reflection:
@@ -433,140 +425,6 @@ class Reflection:
 
 Reflection.dispatch_edit_delete()  # only once
 
-## not hereeee
-# show_routes = DB.select('types' , cols =['action_method'])
-# # print(show_routes)
-# show = [i['action_method'] for i in show_routes ]
-# # print(show)
-# Reflection( show )
-
-
-# bruh
-# convention for showing :: device type in plural form  i.e. pcs
-# @app.route('/pcs' , methods=['GET' , 'POST'])
-# def pcs():
-
-
-#     pcs = DB.select('devs' ,  where ='type_id = "pcs" ')
-
-#     return render_template('devs/show_all.html' , type ='pcs' , data= pcs  )
-
-
-# @app.route('/laptops' , methods=['GET' , 'POST'])
-# def laptops():
-#     laptops = DB.select('devs' ,  where ='type_id = "laptops" ')
-#     print(laptops , 'for real')
-#     return render_template('devs/show_all.html' , type ='laptops' ,data=laptops )
-
-
-# @app.route('/monitors' , methods=['GET' , 'POST'])
-# def monitors():
-#     monitors = DB.select('devs' ,  where ='type_id = "monitors" ')
-#     return render_template('devs/show_all.html' , type ='monitors' ,data=monitors )
-
-
-# @app.route('/printers' , methods=['GET' , 'POST'])
-# def printers():
-#     printers = DB.select('devs' ,  where ='type_id = "printers" ')
-#     return render_template('devs/show_all.html' , type ='printers' ,data=printers )
-
-# bruh
-
-
-# bruh
-
-# convention for adding a device :: add_device type in plural form i.e. add_pcs
-# how i will do it :: only 1 template and a hidden input field with the type as the name's attribute value
-# @app.route('/add_pcs' , methods=['GET' , 'POST'])
-# def add_pcs():
-
-#     if request.method == 'POST' :
-
-#         # return request.form
-#         DB.insert('devs' , [Device(request.form['name'] ,  request.form['sn'] , request.form['place'] ,request.form['type_id'] ,request.form['status']).json()])
-#         return redirect(url_for('index'))
-
-#     else :
-
-#         return render_template('devs/add_dev.html' , type ='pcs' ,add_action ='add_pcs' )
-
-# @app.route('/add_laptops' , methods=['GET' , 'POST'])
-# def add_laptops():
-#     if request.method == 'POST' :
-
-#         # return request.form
-#         DB.insert('devs' , [Device(request.form['name'] ,  request.form['sn'] , request.form['place'] ,request.form['type_id'] ,request.form['status']).json()])
-#         return redirect(url_for('index'))
-
-#     else :
-#         return render_template('devs/add_dev.html', type ='laptops' ,add_action ='add_laptops' )
-
-
-# @app.route('/add_monitors' , methods=['GET' , 'POST'])
-# def add_monitors():
-#     if request.method == 'POST' :
-
-#         # return request.form
-#         DB.insert('devs' , [Device(request.form['name'] ,  request.form['sn'] , request.form['place'] ,request.form['type_id'] ,request.form['status']).json()])
-#         return redirect(url_for('index'))
-
-#     else :
-#         return render_template('devs/add_dev.html' , type ='monitors' ,add_action ='add_monitors')
-
-# @app.route('/add_printers' , methods=['GET' , 'POST'])
-# def add_printers():
-#     if request.method == 'POST' :
-
-#         # return request.form
-#         DB.insert('devs' , [Device(request.form['name'] ,  request.form['sn'] , request.form['place'] ,request.form['type_id'] ,request.form['status']).json()])
-#         return redirect(url_for('index'))
-
-#     else :
-#          return render_template('devs/add_dev.html' , type ='printers' ,add_action ='add_printers' )
-
-
-# bruh
-
-
-# bruh
-
-# @app.route('/edit_dev/<id>' ,  methods=['GET' , 'POST'])
-# def edit_dev(id):
-
-
-#     # DB.update('quiz' , {"full_name" : "mohaned" , "email" : 'mohaned.com' } , f'id = {id} ')
-#     if request.method == 'POST' :
-
-#         dev_route = request.form['type_id']
-#         # print(request.form)
-#         DB.update('devs' , Device(request.form['name'] ,  request.form['sn'] , request.form['place'] ,request.form['type_id'] ,request.form['status']).json() , f'id = {id} ')
-#         return redirect(f'/{dev_route}')
-
-#     else :
-
-#         # return DB.select('quiz',  where= f'id = {id}')[0]
-#         dev = DB.select('devs',  where= f'id = {id}')[0]
-#         print(dev)
-
-#         # teacher_id = quiz['teacher_id']
-#         # selected_teacher = DB.select('teacher' , where = f'id ={teacher_id}')[0]
-
-
-#         # teachers = DB.select('teacher')
-#         return render_template('devs/edit_dev.html' , dev = dev , type = dev['type_id'] )
-# bruh
-
-# bruh
-
-# @app.route('/del_dev/<type>/<id>')
-# def del_dev(type , id):
-
-#     DB.delete('devs'  , f'id = {id} ')
-
-
-#     return redirect(f'/{type}')
-
-# bruh
 
 @app.route('/assign_role', methods=['GET', 'POST'])
 def assign_role():

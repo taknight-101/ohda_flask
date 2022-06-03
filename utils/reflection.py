@@ -1,26 +1,25 @@
 from textwrap import dedent
-# print(__main__)
+
 from __main__ import app
 
 
-class Reflection :
-        name_ens = None
-        def __init__(self,name_ens) -> None:
-            self.name_ens = name_ens
-            # print(name_ens , "YO")
+class Reflection:
+    name_ens = None
 
-            for name_en in name_ens:
-                if  name_en.endswith('s') :
-                    name_en = name_en[:len(name_en)-1]
+    def __init__(self, name_ens) -> None:
+        self.name_ens = name_ens
 
+        for name_en in name_ens:
+            if name_en.endswith('s'):
+                name_en = name_en[:len(name_en)-1]
 
-                show_callback =f'''
+            show_callback = f'''
                         @app.route('/{name_en}s' , methods=['GET' , 'POST'])
                         def {name_en}s():
                             {name_en}s = DB.select('devs' ,  where ='type_id = "{name_en}s" ')
                             return render_template('devs/show_all.html' , type ='{name_en}s' ,data={name_en}s )
                         '''
-                add_callback = f'''
+            add_callback = f'''
                             @app.route(f'/add_{name_en}s' , methods=['GET' , 'POST'])
                             def add_{name_en}s():
                                 if request.method == 'POST' :
@@ -33,7 +32,7 @@ class Reflection :
                                     return render_template('devs/add_dev.html' , type ='{name_en}s' ,add_action ='add_{name_en}s')
                             '''
 
-                edit_callback = '''
+            edit_callback = '''
                     @app.route('/edit_dev/<id>' ,  methods=['GET' , 'POST'])
                     def edit_dev(id):
 
@@ -55,7 +54,7 @@ class Reflection :
 
                     '''
 
-                delete_callback = '''
+            delete_callback = '''
                         @app.route('/del_dev/<type>/<id>')
                         def del_dev(type , id):
 
@@ -65,26 +64,19 @@ class Reflection :
                             return redirect(f'/{type}')
 
                         '''
-                self.dispatch(show_callback)
-        @staticmethod
-        def register():
-            pass
+            self.dispatch(show_callback)
 
+    @staticmethod
+    def register():
+        pass
 
-        # @staticmethod
-        def dispatch(self ,cb):
-            # print(cb)
-            # callbacks = [self.show_callback ,self.add_callback,self.edit_callback , self.delete_callback]
-            print(dedent(cb))
-            exec(dedent(cb))
+    # @staticmethod
+    def dispatch(self, cb):
+        # print(cb)
+        # callbacks = [self.show_callback ,self.add_callback,self.edit_callback , self.delete_callback]
+        print(dedent(cb))
+        exec(dedent(cb))
 
-            # callbacks = [self.show_callback ]
-            # for callback in callbacks:
-            #     eval(callback)
-
-
-
-
-
-
-
+        # callbacks = [self.show_callback ]
+        # for callback in callbacks:
+        #     eval(callback)
