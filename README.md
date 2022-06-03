@@ -1,15 +1,25 @@
-Ohda
+Ohda: A flask based asset management system 
+===================
 ===================
 
+# Project requirements:
 
-A flask based asset management system 
-===================
+ * MySQL daemon & Schema imports
+
+ * Install back_end code dependencies
+
+```
+* pip install -r requirements.txt	
+```
+
+# Serve the app:
+```
+ * python app.py 
+```
 
 
-- - - - 
-# to install back_end code dependencies #
 
- * pip install -r requirements.txt	
+
 
 
 
